@@ -175,7 +175,7 @@ class PostCreateFormTests(TestCase):
         пытается создать неавторизованный пользователь
         """
         comments_count = Comment.objects.filter(id=self.post.pk).count()
-        comment_form_data ={
+        comment_form_data = {
             'text': 'Новый комментарий гостя',
             'post_id': self.post.pk
         }
