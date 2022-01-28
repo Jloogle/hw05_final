@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Об авторе проекта{% endblock %}
+{% block content %}
+<h1>Привет, я автор</h1>
+<h2>Меня зовут Игорь Живов</h2>
+<h3>Мне 24 года</h3>
+<p class="text-sm-center">
+  Тут я размещу информацию о себе используя свои умения верстать.
+  Картинки, блоки, элементы бустрап. А может быть, просто напишу несколько абзацев текста.
+</p>
+<div class="row">
+<div class="col-md-6">
+<div class="badge bg-primary text-wrap" style="width: 98%;">
+  <h5>Краткая предыстория</h5>
+</div>
+<p class="text-sm-left">Я учился на метролога, но на протяжении всего процесса моего взросления мне были интересны компьютеры.</p>
+<p class="text-sm-left">И еще будучи школьником я делал типичные и простенькие сайты на <em>Ucoz</em>, делал свои сервера <b>майнкрафта</b>)))</p>
+</div>
+<div class="col-md-6">
+  <div class="badge bg-primary text-wrap" style="width: 98%;">
+    <h5>Сейчас</h5>
+  </div>
+  <p class="text-sm-left">На данный момент (26.12.2021) я работаю испытателем и обучаюсь в яндекс практикуме на Python-разработчика и это очень круто.</p>
+  <p class="text-sm-left">Но еще до начала обучения я интересовался "Питоном" и сам немного его учил, но чего-то не хватало...</p>
+  <p class="text-sm-left">И начав учиться в практикуме я понял, что не хватало коммуникации с эдаким коллективом, в котором я учусь</p>
+  <p class="text-sm-left">Сейчас я получаю истинное удовольствие, когда после нескольких часов раздумий, исправления ошибок, после которых вылезают все новые ошибки) </p>
+  <p class="text-sm-left">И ты наконец их исправляешь и видишь, как твой проект работает. Это ли не счастье?</p>
+</div>
+<p class="text-sm-left">В заключение вот ссылка на мой GitHub и фото моей собачки:)</p>
+</div>
+<a href="https://github.com/Jloogle" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true" style="position: relative; left: 50px;">
+  GitHub
+</a>
+<br>
+<br>
+<img width="200px" height="200px" src="{% static 'img/Pesik.png/' %}" class="img-thumbnail" style="position: relative; left: 45%;">
+{% endblock %}
