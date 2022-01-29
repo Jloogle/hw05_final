@@ -8,7 +8,7 @@ from .utils import func_paginator
 
 def index(request):
     template = 'posts/index.html'
-    post_list = Post.objects.all()
+    post_list = Post.objects.select_related('author').all()
     page_obj = func_paginator(request, post_list)
     context = {
         'page_obj': page_obj,
