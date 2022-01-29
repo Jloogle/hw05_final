@@ -24,8 +24,7 @@ class FollowTestCase(TestCase):
 
     def test_follow(self):
         """
-        Проверяем, увеличивается ли количество подписчиков у автора после
-        подписки на него, и уменьшается ли после отписки.
+        Проверяем, появляется ли подписка в базе, после подписки на автора
         """
         self.user_follower_aut.get(reverse(
             'posts:profile_follow', kwargs={
@@ -37,6 +36,9 @@ class FollowTestCase(TestCase):
                 author=self.user_author).exists())
 
     def test_unfollow(self):
+        """
+        Проверяем, что подписки в базе нет, после отписки от автора
+        """
         self.user_follower_aut.get(reverse(
             'posts:profile_unfollow', kwargs={
                 'username': self.user_author.username}
