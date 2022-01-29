@@ -101,7 +101,8 @@ class PostCreateFormTests(TestCase):
             'username': self.user.username}))
         self.assertEqual(Post.objects.count(), count_post + 1)
         post_last = Post.objects.order_by('-id', '-pub_date').first()
-        self.assertEqual(post_last.image.name, 'posts/small.gif',
+        self.assertEqual(post_last.image.name,
+                         ('posts/' + form_data['image'].name),
                          'Картинка созданного поста и последнего не совпадает')
         self.assertEqual(post_last.text, form_data['text'],
                          'Текст созданного поста и последнего не совпадает')
