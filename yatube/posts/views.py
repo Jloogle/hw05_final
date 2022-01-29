@@ -40,9 +40,8 @@ def profile(request, username: str):
     count_follower = author.following.count()
     user = request.user
     following = (
-        user.is_authenticated and
-        author.following.exists() and
-        (user != author)
+        user.is_authenticated
+        and author.following.exists() and (user != author)
         )
     context = {
         'page_obj': page_obj,
