@@ -2,7 +2,7 @@ from django.core.cache import cache
 from django.test import Client, TestCase
 from django.urls import reverse
 
-from ..models import Post, User
+from ..models import Post, User, Follow
 
 
 class FollowTestCase(TestCase):
@@ -22,25 +22,29 @@ class FollowTestCase(TestCase):
         self.user_follower_aut = Client()
         self.user_follower_aut.force_login(self.user_follower)
 
-    def test_follow_and_unfollow(self):
+    def test_follow(self):
         """
         Проверяем, увеличивается ли количество подписчиков у автора после
         подписки на него, и уменьшается ли после отписки.
         """
-        follow_count = self.user_author.following.count()
         self.user_follower_aut.get(reverse(
             'posts:profile_follow', kwargs={
                 'username': self.user_author.username}
         ))
-        follow_count_after = self.user_author.following.count()
-        self.assertEqual(follow_count_after, follow_count + 1)
+        self.assertTrue(
+            Follow.objects.filter(
+                user=self.user_follower).filter(
+                author=self.user_author).exists())
 
+    def test_unfollow(self):
         self.user_follower_aut.get(reverse(
             'posts:profile_unfollow', kwargs={
                 'username': self.user_author.username}
         ))
-        follow_count_after_unfollow = self.user_author.following.count()
-        self.assertEqual(follow_count, follow_count_after_unfollow)
+        self.assertFalse(
+            Follow.objects.filter(
+                user=self.user_follower).filter(
+                author=self.user_author).exists())
 
     def test_view_post_follow_index(self):
         """
