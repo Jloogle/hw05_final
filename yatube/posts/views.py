@@ -105,6 +105,15 @@ def post_edit(request, post_id):
 
 
 @login_required
+def post_delete(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    if request.user != post.author:
+        return redirect('posts:post_detail', post_id)
+    post.delete()
+    return redirect('posts:post_detail', post_id)
+
+
+@login_required
 def add_comment(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     form = CommentForm(request.POST or None)

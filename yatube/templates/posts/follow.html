@@ -6,6 +6,7 @@
   Последние обновления на сайте авторов, на которых вы подписаны
 {% endblock %}
 {% block content %}
+  <h1>Последние обновления на сайте авторов, на которых вы подписаны</h1>
   {% include 'posts/includes/switcher.html' %}
   {% cache 20 follow_page page_obj.number %}
     {% for post in page_obj %}
