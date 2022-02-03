@@ -57,8 +57,10 @@ def post_detail(request, post_id):
     template = 'posts/post_detail.html'
     post = get_object_or_404(Post, pk=post_id)
     comments = Comment.objects.filter(post=post)
+    comments_count = comments.count()
     form = CommentForm()
     context = {
+        'comments_count': comments_count,
         'comments': comments,
         'post': post,
         'form': form
@@ -110,7 +112,7 @@ def post_delete(request, post_id):
     if request.user != post.author:
         return redirect('posts:post_detail', post_id)
     post.delete()
-    return redirect('posts:post_detail', post_id)
+    return redirect('posts:profile', post.author.username)
 
 
 @login_required
