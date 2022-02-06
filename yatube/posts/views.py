@@ -1,34 +1,34 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
+from django.views.generic import ListView
+from django.conf import settings
 
 from .forms import CommentForm, PostForm
 from .models import Comment, Follow, Group, Post, User
 from .utils import func_paginator
 
 
-def index(request):
-    template = 'posts/index.html'
-    post_list = Post.objects.select_related('author').all()
-    page_obj = func_paginator(request, post_list)
-    context = {
-        'page_obj': page_obj,
-    }
-    return render(request, template, context=context)
+class PostHome(ListView):
+    paginate_by = settings.POST_PER_PAGE
+    model = Post
+    template_name = 'posts/index.html'
+
+    def get_queryset(self):
+        return Post.objects.select_related('author').all()
 
 
-def group_posts(request, slug: str):
-    """
-    Получение списка постов для выбранной группы из базы данных
-    """
-    template = 'posts/group_list.html'
-    group = get_object_or_404(Group, slug=slug)
-    post_list = group.posts.all()
-    page_obj = func_paginator(request, post_list)
-    context = {
-        'page_obj': page_obj,
-        'group': group,
-    }
-    return render(request, template, context=context)
+class GroupPosts(ListView):
+    paginate_by = settings.POST_PER_PAGE
+    model = Post
+    template_name = 'posts/group_list.html'
+
+    def get_queryset(self):
+        return Post.objects.filter(group__slug=self.kwargs['slug'])
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['group'] = get_object_or_404(Group, slug=self.kwargs['slug'])
+        return context
 
 
 def profile(request, username: str):

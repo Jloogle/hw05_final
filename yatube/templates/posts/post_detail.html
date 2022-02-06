@@ -16,8 +16,9 @@
       {% if post.group %}
         <li class="list-group-item">
           Группа: {{ post.group.title }}
+            <br>
           <a href="{% url 'posts:group_list' post.group.slug %}">
-            все записи группы
+            Все записи группы
           </a>
         </li>
       {% else %}
@@ -46,16 +47,14 @@
      {{ post.text }}
     </p>
     {% if post.author.id == request.user.id %}
-
       <a class="btn btn-primary" href="{% url 'posts:post_edit' post.pk %}">
         Редактировать пост
       </a>
       <a class="btn btn-primary" href="{% url 'posts:post_delete' post.pk %}">
         Удалить пост
       </a>
-
     {% endif %}
+  {% include 'includes/comments.html' %}
   </article>
 </div>
-{% include 'includes/comments.html' %}
 {% endblock %}
