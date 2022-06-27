@@ -37,6 +37,7 @@ python manage.py runserver
 
 # В планах доработки
 * Переделать view функции в view классы
+* доделать функцию регистрации по email
 
 # Разработчик
 Живов Игорь - https://github.com/Jloogle
