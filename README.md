@@ -35,5 +35,8 @@ python manage.py migrate
 python manage.py runserver
 ```
 
+# В планах доработки
+* Переделать view функции в view классы
+
 # Разработчик
 Живов Игорь - https://github.com/Jloogle
